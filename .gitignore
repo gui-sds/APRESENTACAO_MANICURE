@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.artifacts/
+.brand-reference.png
+*.tar.gz
+.openai/sites-work/
