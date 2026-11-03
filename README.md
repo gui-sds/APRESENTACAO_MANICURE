@@ -1,5 +1,5 @@
 # GS RISE · Nail Studio
-
+ 
 Site responsivo em HTML, CSS e JavaScript puro. Abra `index.html` ou execute `npm start` e acesse http://localhost:3000.
 
 ## Personalização
