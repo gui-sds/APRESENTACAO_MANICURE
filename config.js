@@ -1,6 +1,6 @@
 // Dados reais da manicure. O número deve incluir país + DDD, sem sinais.
 window.STUDIO_CONFIG = {
-  whatsapp: "5546999388089",
+  whatsapp: "5546988035188",
   instagram: "https://www.instagram.com/gs.rise/",
   address: "Av. Batel, 233 — Bairro das Torres",
   city: "Dois Vizinhos - PR",
