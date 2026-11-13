@@ -1,5 +1,7 @@
 Logo vetorial, favicon e Manrope: identidade original em https://gsstudio-eight.vercel.app/.
 
+Ícone de WhatsApp: Bootstrap Icons, licença MIT em `LICENSE-bootstrap-icons.txt`. Fonte: https://github.com/twbs/icons/blob/main/icons/whatsapp.svg.
+
 hero.webp: imagem editorial gerada com IA para esta apresentação. Não representa trabalho real do studio.
 
 Fotografias ilustrativas da galeria: Unsplash. Não são apresentadas como portfólio do studio.

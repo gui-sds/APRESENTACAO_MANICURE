@@ -237,7 +237,6 @@
       `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Qual é o endereço do GS RISE Nail Studio?")}`,
     );
   else $("#maps-link").href = "#agendamento";
-  $("#year").textContent = new Date().getFullYear();
   const menuButton = $(".menu-toggle"),
     menu = $("#mobile-menu");
   function closeMenu() {
@@ -298,28 +297,5 @@
     document
       .querySelectorAll(".reveal")
       .forEach((element) => observer.observe(element));
-    let heroVisible = true,
-      bookingVisible = false,
-      footerVisible = false;
-    const mobileCta = $(".mobile-booking");
-    const ctaObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target.matches(".hero")) heroVisible = entry.isIntersecting;
-          if (entry.target.matches(".booking"))
-            bookingVisible = entry.isIntersecting;
-          if (entry.target.matches(".site-footer"))
-            footerVisible = entry.isIntersecting;
-        });
-        mobileCta.classList.toggle(
-          "show",
-          !heroVisible && !bookingVisible && !footerVisible,
-        );
-      },
-      { threshold: 0 },
-    );
-    [".hero", ".booking", ".site-footer"].forEach((selector) =>
-      ctaObserver.observe($(selector)),
-    );
   }
 })();

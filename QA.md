@@ -1,5 +1,15 @@
 # Verificação
 
+## Revisão de 13/11/2026
+
+Aceitação: capa com foto em tela cheia, texto no canto inferior esquerdo e somente seta/menu no alto à direita. Remover logo do cabeçalho, estrelas, legenda da capa, faixa de frases, rodapé, CTA flutuante mobile e os textos de apoio indicados. Campo opcional com rótulo Observação. Dia e horário em linhas separadas no celular. Ícones do WhatsApp quadrados, preenchidos e sem contorno adicional.
+
+Controles: menu abrir, selecionar seção e fechar; navegação pelo botão da capa; serviços que preenchem o formulário; formulário com data, horário, nome e observação; WhatsApp, Instagram e localização.
+
+Verificado nesta revisão: build e âncoras; larguras 320, 390, 768, 844 em paisagem e 1440; capa e controles dentro da tela, imagem carregada, elementos removidos ausentes e nenhuma rolagem horizontal. Menu abre e fecha ao selecionar Agendamento. Domingo desabilita horários e apresenta aviso; nome com espaços é recusado; solicitação válida inclui serviço, data, horário, nome e observação. A abertura externa foi interceptada no navegador, sem envio real de mensagem. Nenhum erro de JavaScript observado. Capturas em `.artifacts/revisao-2026-11-13/`.
+
+## Verificação da versão inicial
+
 Inventário de aceitação: identidade original GS RISE (logo, Manrope, preto/off-white/verde), apresentação, serviços, galeria ilustrativa, localização pendente ou Google Maps configurado, Instagram pendente ou link configurado, WhatsApp como contato, solicitação com serviço/data/horário/nome/observação, resumo e prévia sem número configurado.
 
 Controles: navegação por âncoras; menu mobile abrir/fechar/link/Escape; seleção de serviço pela lista; formulário; modal de prévia abrir/fechar/Escape; Instagram e localização; topo e CTA mobile contextual.

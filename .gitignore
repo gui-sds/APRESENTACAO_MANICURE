@@ -4,3 +4,4 @@ dist/
 .brand-reference.png
 *.tar.gz
 .openai/sites-work/
+.publish-source/

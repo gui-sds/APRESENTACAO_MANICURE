@@ -126,6 +126,8 @@ em {
   background: var(--line);
 }
 .skip-link {
+  opacity: 0;
+  pointer-events: none;
   position: fixed;
   z-index: 99;
   top: -80px;
@@ -135,6 +137,8 @@ em {
 }
 .skip-link:focus {
   top: 10px;
+  opacity: 1;
+  pointer-events: auto;
 }
 .site-header {
   height: 96px;
@@ -1689,6 +1693,220 @@ body.menu-open {
   .care-strip {
     font-size: 7px;
     gap: 10px;
+  }
+}
+/* Full-screen cover with only the two navigation controls over the photograph. */
+.site-header {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top));
+  right: var(--gutter);
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  gap: 12px;
+}
+.header-cta,
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  margin: 0;
+  border: 0;
+  background: var(--paper);
+}
+.header-cta svg {
+  width: 22px;
+  height: 22px;
+}
+.menu-toggle {
+  flex-direction: column;
+  gap: 7px;
+  z-index: 22;
+}
+.menu-toggle span {
+  display: block;
+  height: 1px;
+  width: 24px;
+  background: var(--ink);
+  transition: transform 0.25s;
+}
+.menu-toggle[aria-expanded="true"] span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+.mobile-nav {
+  display: flex;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  left: auto;
+  width: min(330px, calc(100vw - 48px));
+  max-height: calc(100svh - 110px);
+  overflow-y: auto;
+  flex-direction: column;
+  padding: 20px 26px;
+  background: var(--paper);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  box-shadow: 0 20px 35px #1c251c15;
+}
+.mobile-nav.open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+.mobile-nav a {
+  font-size: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.hero {
+  height: 100svh;
+  min-height: 0;
+  max-height: none;
+  color: var(--paper);
+}
+.hero-photo {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero-photo img {
+  object-position: center;
+}
+.hero-photo:after {
+  background: linear-gradient(90deg, #20170e80, transparent 72%),
+    linear-gradient(0deg, #20170e88, transparent 75%);
+}
+.hero-content {
+  position: absolute;
+  left: var(--gutter);
+  bottom: max(40px, env(safe-area-inset-bottom));
+  width: calc(100% - 2 * var(--gutter));
+  max-width: 650px;
+  padding: 0;
+}
+.hero h1 {
+  font-size: clamp(60px, 7.5vw, 112px);
+  letter-spacing: -0.065em;
+  margin: 14px 0;
+}
+.hero h2 {
+  font-size: clamp(36px, 4.4vw, 62px);
+}
+.hero h2 em,
+.hero-description,
+.hero-secondary {
+  color: var(--paper);
+}
+.hero-description {
+  margin: 18px 0 22px;
+}
+.hero .button-dark {
+  background: var(--paper);
+  color: var(--ink);
+}
+.hero .button-dark:hover {
+  background: var(--green);
+}
+.whatsapp-icon {
+  fill: currentColor;
+  stroke: none;
+  display: block;
+  aspect-ratio: 1;
+}
+.field-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+.field-row input,
+.field-row select {
+  display: block;
+  height: 48px;
+  min-height: 48px;
+  max-width: 100%;
+  margin: 0;
+  line-height: normal;
+}
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+}
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: left;
+  min-height: 1.2em;
+}
+.contact {
+  display: block;
+}
+.contact-links {
+  max-width: 620px;
+  margin-inline: auto;
+}
+@media (max-width: 800px) {
+  .booking {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .booking-form {
+    width: 100%;
+    max-width: 560px;
+  }
+}
+@media (max-width: 600px) {
+  .site-header {
+    top: max(16px, env(safe-area-inset-top));
+    right: 20px;
+    gap: 4px;
+  }
+  .hero-photo img {
+    object-position: 62% center;
+  }
+  .hero-content {
+    left: 24px;
+    width: calc(100% - 48px);
+    bottom: max(28px, env(safe-area-inset-bottom));
+  }
+  .hero h1 {
+    font-size: clamp(56px, 16vw, 76px);
+  }
+  .hero h2 {
+    font-size: clamp(34px, 10vw, 42px);
+  }
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .field-row input,
+  .field-row select {
+    font-size: 16px;
+  }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero-content {
+    bottom: 20px;
+  }
+  .hero .eyebrow,
+  .hero-description,
+  .hero-secondary {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 56px;
+    margin: 0 0 8px;
+  }
+  .hero h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
