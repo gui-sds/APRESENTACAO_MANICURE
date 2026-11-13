@@ -1,5 +1,11 @@
 # Verificação
 
+## Ajuste de cabeçalho e contato
+
+Cabeçalho fino de 52px, com seta de 17px e menu de 19px, mantendo alvos de toque de 44px. Capa ocupa a altura restante da tela; botão Agendar meu momento removido da capa. Contatos reduzidos a dois ícones de 24px, centralizados lado a lado em faixa preta de 80px, com nomes acessíveis e destinos preservados.
+
+Conferidos desktop 1440×900 e celular 390×844 por capturas; 320×740 e paisagem 844×390 sem rolagem horizontal ou conteúdo da capa cortado. Menu abre e fecha ao escolher Agendamento. Links de WhatsApp e Instagram, ausência do botão removido, cor e altura da faixa conferidos. Build aprovado e nenhum erro de JavaScript. Capturas em `.artifacts/revisao-compacta/`.
+
 ## Revisão de 13/11/2026
 
 Aceitação: capa com foto em tela cheia, texto no canto inferior esquerdo e somente seta/menu no alto à direita. Remover logo do cabeçalho, estrelas, legenda da capa, faixa de frases, rodapé, CTA flutuante mobile e os textos de apoio indicados. Campo opcional com rótulo Observação. Dia e horário em linhas separadas no celular. Ícones do WhatsApp quadrados, preenchidos e sem contorno adicional.
