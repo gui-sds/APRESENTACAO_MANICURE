@@ -1,5 +1,9 @@
 # Verificação
 
+## Remoção do cabeçalho
+
+Cabeçalho, seta e menu removidos; capa começa em y=0 e preenche 100svh. Conferidos desktop 1440×900 e celular 390×844: nenhuma faixa superior, rolagem horizontal ou erro de JavaScript. Selecionar Esmaltação em gel na lista continua preenchendo o formulário. Build e âncoras aprovados.
+
 ## Ajuste de cabeçalho e contato
 
 Cabeçalho fino de 52px, com seta de 17px e menu de 19px, mantendo alvos de toque de 44px. Capa ocupa a altura restante da tela; botão Agendar meu momento removido da capa. Contatos reduzidos a dois ícones de 24px, centralizados lado a lado em faixa preta de 80px, com nomes acessíveis e destinos preservados.

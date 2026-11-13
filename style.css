@@ -1771,7 +1771,7 @@ body.menu-open {
   border-bottom: 1px solid var(--line);
 }
 .hero {
-  height: calc(100svh - 52px);
+  height: 100svh;
   min-height: 0;
   max-height: none;
   color: var(--paper);

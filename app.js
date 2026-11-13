@@ -237,51 +237,6 @@
       `https://wa.me/${whatsapp}?text=${encodeURIComponent("Olá! Qual é o endereço do GS RISE Nail Studio?")}`,
     );
   else $("#maps-link").href = "#agendamento";
-  const menuButton = $(".menu-toggle"),
-    menu = $("#mobile-menu");
-  function closeMenu() {
-    menu.classList.remove("open");
-    menu.inert = true;
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "Abrir menu");
-    document.body.classList.remove("menu-open");
-  }
-  menuButton.addEventListener("click", () => {
-    if (menu.classList.contains("open")) closeMenu();
-    else {
-      menu.inert = false;
-      menu.classList.add("open");
-      menuButton.setAttribute("aria-expanded", "true");
-      menuButton.setAttribute("aria-label", "Fechar menu");
-      document.body.classList.add("menu-open");
-    }
-  });
-  menu
-    .querySelectorAll("a")
-    .forEach((link) => link.addEventListener("click", closeMenu));
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && menu.classList.contains("open")) {
-      closeMenu();
-      menuButton.focus();
-    }
-  });
-  document.addEventListener("click", (event) => {
-    if (
-      menu.classList.contains("open") &&
-      !$(".site-header").contains(event.target)
-    )
-      closeMenu();
-  });
-  matchMedia("(min-width: 801px)").addEventListener("change", (event) => {
-    if (event.matches) closeMenu();
-  });
-  document.addEventListener("focusin", (event) => {
-    if (
-      menu.classList.contains("open") &&
-      !$(".site-header").contains(event.target)
-    )
-      closeMenu();
-  });
   if ("IntersectionObserver" in window) {
     document.body.classList.add("js-motion");
     const observer = new IntersectionObserver(
