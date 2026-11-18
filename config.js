@@ -8,6 +8,7 @@ window.STUDIO_CONFIG = {
   openingHours: "",
   // Horários ilustrativos: preferências de solicitação, não vagas confirmadas.
   workingDays: [1, 2, 3, 4, 5, 6], // Domingo = 0
+  saturdayTimeSlots: ["09:00", "10:00", "11:00"],
   timeSlots: [
     "09:00",
     "10:00",

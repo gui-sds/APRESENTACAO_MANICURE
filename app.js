@@ -76,12 +76,92 @@
     $("#service-list").append(row);
   });
 
-  const now = new Date();
-  dateInput.min = localDate(now);
-  const lastDay = new Date(now);
-  lastDay.setDate(lastDay.getDate() + 90);
-  dateInput.max = localDate(lastDay);
+  let now, lastDay;
+  function refreshDateBounds() {
+    now = new Date();
+    dateInput.min = localDate(now);
+    lastDay = new Date(now);
+    lastDay.setDate(lastDay.getDate() + 90);
+    dateInput.max = localDate(lastDay);
+  }
+  refreshDateBounds();
+  const dateToggle = $("#date-toggle"), calendar = $("#booking-calendar");
+  let calendarMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  function closeCalendar() {
+    calendar.hidden = true;
+    dateToggle.setAttribute("aria-expanded", "false");
+  }
+  function renderCalendar() {
+    refreshDateBounds();
+    $("#calendar-month").textContent = calendarMonth.toLocaleDateString("pt-BR", {
+      month: "long", year: "numeric",
+    });
+    const days = $("#calendar-days");
+    days.replaceChildren();
+    for (let i = 0; i < calendarMonth.getDay(); i++) days.append(create("span"));
+    const total = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + 1, 0).getDate();
+    for (let day = 1; day <= total; day++) {
+      const date = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), day);
+      const value = localDate(date);
+      const closed = !config.workingDays.includes(date.getDay());
+      const past = value < dateInput.min;
+      const button = create("button", closed ? "calendar-day calendar-closed" : "calendar-day", day);
+      button.type = "button";
+      button.disabled = closed || past || value > dateInput.max;
+      button.setAttribute("aria-label", `${date.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}${past ? ", data passada, indisponível" : closed ? ", fechado" : date.getDay() === 6 ? ", somente pela manhã" : ""}`);
+      button.setAttribute("aria-pressed", String(value === dateInput.value));
+      button.addEventListener("click", () => {
+        refreshDateBounds();
+        if (value < dateInput.min || value > dateInput.max || closed) {
+          renderCalendar();
+          return;
+        }
+        dateInput.value = value;
+        dateInput.dispatchEvent(new Event("change", { bubbles: true }));
+        closeCalendar();
+        dateToggle.focus();
+      });
+      days.append(button);
+    }
+    $("#calendar-prev").disabled = calendarMonth <= new Date(now.getFullYear(), now.getMonth(), 1);
+    $("#calendar-next").disabled = calendarMonth >= new Date(lastDay.getFullYear(), lastDay.getMonth(), 1);
+  }
+  function openCalendar() {
+    refreshDateBounds();
+    const selected = dateInput.value >= dateInput.min && dateInput.value <= dateInput.max
+      ? parseDate(dateInput.value) : now;
+    calendarMonth = new Date(selected.getFullYear(), selected.getMonth(), 1);
+    renderCalendar();
+    calendar.hidden = false;
+    dateToggle.setAttribute("aria-expanded", "true");
+    calendar.scrollIntoView({ block: "nearest", behavior: "instant" });
+  }
+  dateToggle.addEventListener("click", () => calendar.hidden ? openCalendar() : closeCalendar());
+  for (const [id, step] of [["#calendar-prev", -1], ["#calendar-next", 1]]) {
+    $(id).addEventListener("click", () => {
+      calendarMonth.setMonth(calendarMonth.getMonth() + step);
+      renderCalendar();
+    });
+  }
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".date-picker")) closeCalendar();
+  });
+  $(".date-picker").addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { closeCalendar(); dateToggle.focus(); }
+  });
+  $(".date-picker").addEventListener("focusout", (event) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) closeCalendar();
+  });
+  dateInput.addEventListener("invalid", (event) => {
+    event.preventDefault();
+    openCalendar();
+    dateToggle.focus();
+    $("#date-help").textContent = dateInput.validationMessage;
+  });
   function updateTimes() {
+    refreshDateBounds();
+    $("#date-display").textContent = dateInput.value
+      ? parseDate(dateInput.value).toLocaleDateString("pt-BR") : "Escolha o dia";
     dateInput.setCustomValidity("");
     timeSelect.replaceChildren(new Option("Selecione um horário", ""));
     timeSelect.disabled = true;
@@ -92,7 +172,7 @@
       return;
     }
     if (
-      dateInput.value < localDate(new Date()) ||
+      dateInput.value < dateInput.min ||
       dateInput.value > dateInput.max
     ) {
       dateInput.setCustomValidity(
@@ -113,7 +193,11 @@
       return;
     }
     const current = new Date();
-    const slots = config.timeSlots.filter(
+    const daySlots = parseDate(dateInput.value).getDay() === 6
+      ? config.saturdayTimeSlots : config.timeSlots;
+    if (parseDate(dateInput.value).getDay() === 6)
+      $("#date-help").textContent = "Sábado: atendimento somente pela manhã, sujeito à confirmação.";
+    const slots = daySlots.filter(
       (slot) =>
         dateInput.value !== localDate(current) ||
         slot >
@@ -130,6 +214,28 @@
     }
     updateSummary();
   }
+  function refreshAvailability() {
+    const selectedTime = timeSelect.value;
+    updateTimes();
+    if ([...timeSelect.options].some((option) => option.value === selectedTime)) {
+      timeSelect.value = selectedTime;
+      updateSummary();
+    }
+    if (!calendar.hidden) renderCalendar();
+  }
+  window.addEventListener("focus", refreshAvailability);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) refreshAvailability();
+  });
+  function refreshAtMidnight() {
+    const current = new Date();
+    const midnight = new Date(current.getFullYear(), current.getMonth(), current.getDate() + 1);
+    window.setTimeout(() => {
+      refreshAvailability();
+      refreshAtMidnight();
+    }, midnight - current + 50);
+  }
+  refreshAtMidnight();
   function updateSummary() {
     const service = config.services.find(
         (item) => item.id === serviceSelect.value,

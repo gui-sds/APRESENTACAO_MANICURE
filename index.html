@@ -199,15 +199,32 @@
             </select>
           </div>
           <div class="field-row">
-            <div class="field">
-              <label for="date">Qual dia?</label
-              ><input
+            <div class="field date-picker">
+              <label for="date-toggle">Qual dia?</label>
+              <input
                 id="date"
                 name="date"
                 type="date"
+                class="date-native"
+                tabindex="-1"
+                aria-label="Dia do agendamento"
                 aria-describedby="date-help"
                 required
               />
+              <button id="date-toggle" class="date-toggle" type="button" aria-expanded="false" aria-controls="booking-calendar" aria-describedby="date-help">
+                <span id="date-display">Escolha o dia</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="1"/><path d="M8 3v4m8-4v4M4 10h16"/></svg>
+              </button>
+              <div id="booking-calendar" class="booking-calendar" hidden>
+                <div class="calendar-heading">
+                  <button id="calendar-prev" type="button" aria-label="Mês anterior">‹</button>
+                  <span id="calendar-month" aria-live="polite"></span>
+                  <button id="calendar-next" type="button" aria-label="Próximo mês">›</button>
+                </div>
+                <div class="calendar-weekdays" aria-hidden="true"><span class="calendar-closed">Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
+                <div id="calendar-days" class="calendar-days" role="group" aria-labelledby="calendar-month"></div>
+                <p class="calendar-note">Domingo fechado · Sábado só pela manhã</p>
+              </div>
             </div>
             <div class="field">
               <label for="time">Qual horário?</label

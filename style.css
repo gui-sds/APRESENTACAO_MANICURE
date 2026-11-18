@@ -720,6 +720,61 @@ em {
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
+.date-picker { position: relative; }
+.field .date-native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.date-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 11px 12px;
+  border: 1px solid #cdd2c5;
+  background: #fafbf6;
+  font-size: 11px;
+  text-align: left;
+}
+.date-toggle svg { width: 16px; height: 16px; }
+.field input:focus, .field select:focus, .field textarea:focus,
+.date-toggle:focus-visible, .date-toggle[aria-expanded="true"] {
+  outline: none;
+  border-color: var(--olive);
+  box-shadow: inset 0 0 0 1px var(--olive);
+}
+.booking-calendar {
+  position: absolute;
+  scroll-margin-block: 16px;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  width: min(294px, calc(100vw - 70px));
+  padding: 12px;
+  border: 1px solid #cdd2c5;
+  background: #fafbf6;
+  box-shadow: 0 8px 24px #181d171a;
+}
+.booking-calendar[hidden] { display: none; }
+.calendar-heading { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.calendar-heading span { font-size: 12px; font-weight: 650; text-transform: capitalize; }
+.calendar-heading button { width: 34px; height: 34px; border: 0; background: transparent; font-size: 24px; }
+.calendar-weekdays, .calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; }
+.calendar-weekdays { margin: 8px 0 4px; font-size: 10px; color: var(--muted); }
+.calendar-day { min-width: 0; height: 34px; border: 0; background: transparent; font-size: 11px; }
+.calendar-closed { text-decoration: line-through; }
+.calendar-day:disabled, .calendar-heading button:disabled { color: #a6ac9e; cursor: default; }
+.calendar-day:not(:disabled):hover { background: #e9ece3; }
+.calendar-day[aria-pressed="true"] { background: var(--olive); color: white; }
+.calendar-note { margin: 8px 0 0; font-size: 9px; color: var(--muted); }
 .field-help {
   font-size: 9px;
   color: #768069;

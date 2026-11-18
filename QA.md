@@ -18,6 +18,12 @@ Controles: menu abrir, selecionar seção e fechar; navegação pelo botão da c
 
 Verificado nesta revisão: build e âncoras; larguras 320, 390, 768, 844 em paisagem e 1440; capa e controles dentro da tela, imagem carregada, elementos removidos ausentes e nenhuma rolagem horizontal. Menu abre e fecha ao selecionar Agendamento. Domingo desabilita horários e apresenta aviso; nome com espaços é recusado; solicitação válida inclui serviço, data, horário, nome e observação. A abertura externa foi interceptada no navegador, sem envio real de mensagem. Nenhum erro de JavaScript observado. Capturas em `.artifacts/revisao-2026-11-13/`.
 
+## Agenda de 16/11/2026
+
+Aceitação: domingos riscados e indisponíveis no calendário; sábado somente às 09:00, 10:00 e 11:00; campo de data com um único contorno de foco. Conferir navegação mensal, fechar por Escape e clique externo, troca de dia apagando horário anterior e validação de datas indisponíveis.
+
+Verificado no Chrome por Playwright: domingos com `line-through` e desabilitados; sábado 21/11 com os três horários matinais; segunda-feira 23/11 preservando todos os horários. Troca de segunda para sábado limpa o horário da tarde. Navegação entre novembro e dezembro e Escape aprovados. Desktop 1440×1000 e celular 390×844 sem rolagem horizontal; calendário e contorno conferidos visualmente, sem erros de JavaScript.
+
 ## Verificação da versão inicial
 
 Inventário de aceitação: identidade original GS RISE (logo, Manrope, preto/off-white/verde), apresentação, serviços, galeria ilustrativa, localização pendente ou Google Maps configurado, Instagram pendente ou link configurado, WhatsApp como contato, solicitação com serviço/data/horário/nome/observação, resumo e prévia sem número configurado.
@@ -31,3 +37,7 @@ Visual: primeira dobra e todas as seções em desktop 1440×960 e mobile 390×84
 Sem envio real de mensagens. A agenda não possui confirmação automática ou controle de vagas. Dados de configuração pendentes estão explicitamente identificados.
 
 Resultado: `npm run check`, build estático e fluxo completo aprovados. Menu, prévia, contatos configurados por interceptação local, datas inválidas, nome com espaços e troca de data verificados. Desktop 1440×960, celular 390×844, 320×740, tablet 768×1024 e paisagem 844×390 sem overflow horizontal ou erros de JavaScript. Imagens e logo carregadas. Capturas de evidência em `.artifacts/` (não versionadas).
+
+## Bloqueio de datas passadas — 17/11/2026
+
+Os limites da agenda são atualizados ao abrir o calendário, mudar de data, retornar à página e à meia-noite local. Testado com relógio simulado no fuso America/Sao_Paulo: antes da meia-noite de 17/11, todos os dias anteriores estavam desabilitados; após a virada para 18/11, o dia 17 ficou desabilitado e o dia 18 permaneceu selecionável. Data passada inserida diretamente também foi recusada e desabilitou os horários. Nenhum erro de JavaScript. Build aprovado.
